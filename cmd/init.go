@@ -20,6 +20,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/gobuffalo/packr/v2"
 	"github.com/morgulbrut/altiumproj/utils"
 	"github.com/morgulbrut/color"
 
@@ -100,4 +101,15 @@ func CleanUpDir(dst string) (err error) {
 
 func FixingProjectFile(dst string, project string) (err error) {
 	//TODO
+func writeTemplateZip(dst string, project string) (err error) {
+	pt := packr.New("projects", "../templates")
+	zip, err := pt.Find(dst + ".zip")
+	if err != nil {
+		color.Red(err.Error())
+	}
+	err = ioutil.WriteFile(project+".zip", zip, 0644)
+	if err != nil {
+		color.Red(err.Error())
+	}
+	return
 }
