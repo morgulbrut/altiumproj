@@ -99,8 +99,29 @@ func CleanUpDir(dst string) (err error) {
 	return
 }
 
-func FixingProjectFile(dst string, project string) (err error) {
-	//TODO
+func InitializeProject(dst string, project string) (err error) {
+	//TODO FUUUUUUUUUUUUUUU!!!!!!!!!!
+
+	err = writeTemplateZip(dst, project)
+	if err != nil {
+		color.Red(err.Error())
+		os.Exit(1)
+	}
+	_, err = utils.Unzip(project+".zip", project)
+	if err != nil {
+		color.Red(err.Error())
+		os.Exit(1)
+	}
+	os.Remove(project + ".zip")
+
+	err = RenameFiles(project, project)
+	if err != nil {
+		color.Red(err.Error())
+		os.Exit(1)
+	}
+
+	return
+}
 
 func writeTemplateZip(dst string, project string) (err error) {
 	pt := packr.New("projects", "../templates")
