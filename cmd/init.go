@@ -101,6 +101,7 @@ func CleanUpDir(dst string) (err error) {
 
 func FixingProjectFile(dst string, project string) (err error) {
 	//TODO
+
 func writeTemplateZip(dst string, project string) (err error) {
 	pt := packr.New("projects", "../templates")
 	zip, err := pt.Find(dst + ".zip")
