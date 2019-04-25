@@ -15,9 +15,7 @@
 package cmd
 
 import (
-	"log"
-
-	"github.com/morgulbrut/altiumproj/utils"
+	"github.com/morgulbrut/color"
 	"github.com/spf13/cobra"
 )
 
@@ -26,31 +24,11 @@ var twolayerCmd = &cobra.Command{
 	Use:   "twolayer",
 	Short: "Initializes a new 2 layer altium project: init twolayer <PROJECTNAME>",
 	Run: func(cmd *cobra.Command, args []string) {
-		err := utils.CopyDir(`D:\Tillo\Documents\hw_altium\trunk\Templates\PCB_Project_2Layer`, args[0])
-		if err != nil {
-			log.Fatal(err)
-		}
-		err = RenameFiles(args[0], args[0])
-		if err != nil {
-			log.Fatal(err)
-		}
-		err = CleanUpDir(args[0])
-		if err != nil {
-			log.Fatal(err)
-		}
+		color.Green("Initalizing 2-layer project %s", args[0])
+		InitializeProject("twolayer", args[0])
 	},
 }
 
 func init() {
 	initCmd.AddCommand(twolayerCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// twolayerCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// twolayerCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

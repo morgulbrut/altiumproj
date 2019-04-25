@@ -113,7 +113,6 @@ func CopyDir(src string, dst string) (err error) {
 	}
 
 	for _, entry := range entries {
-		fmt.Println(entry.Name())
 		srcPath := filepath.Join(src, entry.Name())
 		dstPath := filepath.Join(dst, entry.Name())
 
