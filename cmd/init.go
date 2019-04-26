@@ -82,9 +82,10 @@ func InitializeProject(dst string, project string) (err error) {
 	return
 }
 
-func writeTemplateZip(dst string, project string) (err error) {
+func writeTemplateZip(tmpl string, project string) (err error) {
+	color.Yellow("Unzipping template %q to %s", tmpl, project)
 	pt := packr.New("projects", "../templates")
-	zip, err := pt.Find(dst + ".zip")
+	zip, err := pt.Find(tmpl + ".zip")
 	if err != nil {
 		color.Red(err.Error())
 	}
