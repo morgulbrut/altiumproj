@@ -18,7 +18,6 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"strings"
 
 	"github.com/gobuffalo/packr/v2"
 	"github.com/morgulbrut/altiumproj/utils"
@@ -57,48 +56,6 @@ func init() {
 	// initCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
 
-func RenameFiles(dst string, projName string) (err error) {
-	entries, err := ioutil.ReadDir(dst)
-	if err != nil {
-		return
-	}
-	rename := []string{"BomDoc", "PcbDoc", "PrjPCB", "SchDoc"}
-
-	for _, entry := range entries {
-		filetype := strings.Split(entry.Name(), ".")[1]
-		if utils.StringInSlice(filetype, rename) {
-			oldpath := filepath.Join(dst, entry.Name())
-			newpath := filepath.Join(dst, projName+"."+filetype)
-			color.Yellow("Renaming %s to %s", oldpath, newpath)
-			err := os.Rename(oldpath, newpath)
-			if err != nil {
-				color.Red(err.Error())
-			}
-		}
-	}
-	return
-}
-
-func CleanUpDir(dst string) (err error) {
-	entries, err := ioutil.ReadDir(dst)
-	if err != nil {
-		return
-	}
-	del := []string{"log", "PrjPCBStructure"}
-	for _, entry := range entries {
-		filetype := strings.Split(entry.Name(), ".")[1]
-		if utils.StringInSlice(filetype, del) {
-			oldpath := filepath.Join(dst, entry.Name())
-			color.Yellow("Deleting %s", oldpath)
-			err := os.Remove(oldpath)
-			if err != nil {
-				color.Red(err.Error())
-			}
-		}
-	}
-	return
-}
-
 func InitializeProject(dst string, project string) (err error) {
 	//TODO FUUUUUUUUUUUUUUU!!!!!!!!!!
 
@@ -114,7 +71,8 @@ func InitializeProject(dst string, project string) (err error) {
 	}
 	os.Remove(project + ".zip")
 
-	err = RenameFiles(project, project)
+	rename := []string{"BomDoc", "PcbDoc", "PrjPCB", "SchDoc"}
+	err = utils.RenameFiles(project, project, rename)
 	if err != nil {
 		color.Red(err.Error())
 		os.Exit(1)
