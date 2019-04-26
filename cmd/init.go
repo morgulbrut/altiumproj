@@ -18,6 +18,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"text/template"
 
 	"github.com/gobuffalo/packr/v2"
 	"github.com/morgulbrut/altiumproj/utils"
@@ -57,8 +58,6 @@ func init() {
 }
 
 func InitializeProject(dst string, project string) (err error) {
-	//TODO FUUUUUUUUUUUUUUU!!!!!!!!!!
-
 	err = writeTemplateZip(dst, project)
 	if err != nil {
 		color.Red(err.Error())
@@ -78,6 +77,8 @@ func InitializeProject(dst string, project string) (err error) {
 		os.Exit(1)
 	}
 
+	writeProjectFile(project)
+
 	return
 }
 
@@ -91,5 +92,20 @@ func writeTemplateZip(dst string, project string) (err error) {
 	if err != nil {
 		color.Red(err.Error())
 	}
+	return
+}
+
+func writeProjectFile(project string) (err error) {
+	color.Yellow("Writing %s.PrjPCB", project)
+	tpl, err := template.ParseFiles(filepath.Join(project, "Template.PrjPCBTmpl"))
+	if err != nil {
+		color.Red(err.Error())
+	}
+	projFile, err := os.Create(filepath.Join(project, project+".PrjPCB"))
+	if err != nil {
+		color.Red(err.Error())
+	}
+	tpl.Execute(projFile, project)
+	os.Remove("Template.PrjPCBTmpl")
 	return
 }
