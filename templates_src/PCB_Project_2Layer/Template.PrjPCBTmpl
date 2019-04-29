@@ -28,7 +28,7 @@ DItemRevisionGUID=
 ReportSuppressedErrorsInMessages=0
 FSMCodingStyle=eFMSDropDownList_OneProcess
 FSMEncodingStyle=eFMSDropDownList_OneHot
-OutputPath=Project Outputs for {{ . }}
+OutputPath=Project Outputs for Template
 LogFolderPath=
 ManagedProjectGUID=
 IncludeDesignInRelease=0
@@ -285,7 +285,7 @@ ReleaseItemId=
 Variant=[No Variations]
 OutputJobsCount=1
 DocumentReferenceClass1=DocumentReference
-OutputJobFileName1=Out_Fabrication_2L.OutJob
+OutputJobFileName1=Out_Fabrication.OutJob
 ContentTypeGUID=0C520D2A-E60C-11DF-B822-12313F0024A2
 ConfigurationType=Fabrication
 
@@ -297,7 +297,7 @@ ReleaseItemId=
 Variant=[No Variations]
 OutputJobsCount=1
 DocumentReferenceClass1=DocumentReference
-OutputJobFileName1=Out_Assembly_2L.OutJob
+OutputJobFileName1=Out_Assembly.OutJob
 ContentTypeGUID=0D12F8DC-E60C-11DF-B822-12313F0024A2
 ConfigurationType=Assembly
 
@@ -309,7 +309,7 @@ ReleaseItemId=
 Variant=Default
 OutputJobsCount=1
 DocumentReferenceClass1=DocumentReference
-OutputJobFileName1=Out_Assembly_2L.OutJob
+OutputJobFileName1=Out_Assembly.OutJob
 ContentTypeGUID=0D12F8DC-E60C-11DF-B822-12313F0024A2
 ConfigurationType=Assembly
 
@@ -321,7 +321,7 @@ ReleaseItemId=
 Variant=Default
 OutputJobsCount=1
 DocumentReferenceClass1=DocumentReference
-OutputJobFileName1=Out_Schematic_2L.OutJob
+OutputJobFileName1=Out_Schematic.OutJob
 ContentTypeGUID=B953ABBB-897D-493B-96D2-85DABE1896C4
 ConfigurationType=Custom
 
@@ -333,7 +333,7 @@ ReleaseItemId=
 Variant=Default
 OutputJobsCount=1
 DocumentReferenceClass1=DocumentReference
-OutputJobFileName1=Out_Docu_2L.OutJob
+OutputJobFileName1=Out_Docu.OutJob
 ContentTypeGUID=B953ABBB-897D-493B-96D2-85DABE1896C4
 ConfigurationType=Custom
 
@@ -345,7 +345,7 @@ ReleaseItemId=
 Variant=StepOutput
 OutputJobsCount=1
 DocumentReferenceClass1=DocumentReference
-OutputJobFileName1=Out_Assembly_2L.OutJob
+OutputJobFileName1=Out_Assembly.OutJob
 ContentTypeGUID=0D12F8DC-E60C-11DF-B822-12313F0024A2
 ConfigurationType=Assembly
 
@@ -389,7 +389,7 @@ SaveSettingsToOutJob=-1
 StartProcName=..\Altiumlibs\AdjustDesignators2\Adjust Designators 2.pas>Start
 
 [Generic_EDE]
-OutputDir=Project Outputs for {{ . }}
+OutputDir=Project Outputs for Template
 
 [OutputGroup1]
 Name=Netlist Outputs
