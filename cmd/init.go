@@ -106,7 +106,10 @@ func writeProjectFile(project string) (err error) {
 	if err != nil {
 		color.Red(err.Error())
 	}
-	tpl.Execute(projFile, project)
-	os.Remove("Template.PrjPCBTmpl")
+	err = tpl.Execute(projFile, project)
+	if err != nil {
+		color.Red(err.Error())
+	}
+	os.Remove(filepath.Join(project, "Template.PrjPCBTmpl"))
 	return
 }
