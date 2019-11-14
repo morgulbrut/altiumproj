@@ -15,7 +15,7 @@
 package cmd
 
 import (
-	"github.com/morgulbrut/color"
+	"github.com/morgulbrut/colorlog"
 	"github.com/spf13/cobra"
 )
 
@@ -24,7 +24,7 @@ var twolayerCmd = &cobra.Command{
 	Use:   "twolayer",
 	Short: "Initializes a new 2 layer altium project: init twolayer <PROJECTNAME>",
 	Run: func(cmd *cobra.Command, args []string) {
-		color.Green("Initalizing 2-layer project %s", args[0])
+		colorlog.Info("Initalizing 2-layer project %s", args[0])
 		InitializeProject("twolayer", args[0])
 	},
 }

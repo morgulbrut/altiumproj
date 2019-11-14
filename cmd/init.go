@@ -22,7 +22,7 @@ import (
 
 	"github.com/gobuffalo/packr/v2"
 	"github.com/morgulbrut/altiumproj/utils"
-	"github.com/morgulbrut/color"
+	"github.com/morgulbrut/colorlog"
 
 	"github.com/spf13/cobra"
 )
@@ -56,12 +56,12 @@ func init() {
 func InitializeProject(dst string, project string) (err error) {
 	err = writeTemplateZip(dst, project)
 	if err != nil {
-		color.Red(err.Error())
+		colorlog.Fatal(err.Error())
 		os.Exit(1)
 	}
 	_, err = utils.Unzip(project+".zip", project)
 	if err != nil {
-		color.Red(err.Error())
+		colorlog.Fatal(err.Error())
 		os.Exit(1)
 	}
 	os.Remove(project + ".zip")
@@ -69,7 +69,7 @@ func InitializeProject(dst string, project string) (err error) {
 	rename := []string{"BomDoc", "PcbDoc", "PrjPCB", "SchDoc"}
 	err = utils.RenameFiles(project, project, rename)
 	if err != nil {
-		color.Red(err.Error())
+		colorlog.Fatal(err.Error())
 		os.Exit(1)
 	}
 
@@ -79,32 +79,32 @@ func InitializeProject(dst string, project string) (err error) {
 }
 
 func writeTemplateZip(tmpl string, project string) (err error) {
-	color.Yellow("Unzipping template %q to %s", tmpl, project)
+	colorlog.Debug("Unzipping template %q to %s", tmpl, project)
 	pt := packr.New("projects", "../templates")
 	zip, err := pt.Find(tmpl + ".zip")
 	if err != nil {
-		color.Red(err.Error())
+		colorlog.Fatal(err.Error())
 	}
 	err = ioutil.WriteFile(project+".zip", zip, 0644)
 	if err != nil {
-		color.Red(err.Error())
+		colorlog.Fatal(err.Error())
 	}
 	return
 }
 
 func writeProjectFile(project string) (err error) {
-	color.Yellow("Writing %s.PrjPCB", project)
+	colorlog.Debug("Writing %s.PrjPCB", project)
 	tpl, err := template.ParseFiles(filepath.Join(project, "Template.PrjPCBTmpl"))
 	if err != nil {
-		color.Red(err.Error())
+		colorlog.Fatal(err.Error())
 	}
 	projFile, err := os.Create(filepath.Join(project, project+".PrjPCB"))
 	if err != nil {
-		color.Red(err.Error())
+		colorlog.Fatal(err.Error())
 	}
 	err = tpl.Execute(projFile, project)
 	if err != nil {
-		color.Red(err.Error())
+		colorlog.Fatal(err.Error())
 	}
 	os.Remove(filepath.Join(project, "Template.PrjPCBTmpl"))
 	return

@@ -15,10 +15,10 @@
 package cmd
 
 import (
-	"fmt"
 	"os"
 
 	homedir "github.com/mitchellh/go-homedir"
+	"github.com/morgulbrut/colorlog"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -39,7 +39,7 @@ var rootCmd = &cobra.Command{
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
+		colorlog.Fatal(err.Error())
 		os.Exit(1)
 	}
 }
@@ -66,7 +66,7 @@ func initConfig() {
 		// Find home directory.
 		home, err := homedir.Dir()
 		if err != nil {
-			fmt.Println(err)
+			colorlog.Fatal(err.Error())
 			os.Exit(1)
 		}
 
@@ -79,6 +79,6 @@ func initConfig() {
 
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err == nil {
-		fmt.Println("Using config file:", viper.ConfigFileUsed())
+		colorlog.Error("Using config file:", viper.ConfigFileUsed())
 	}
 }

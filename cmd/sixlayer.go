@@ -15,7 +15,7 @@
 package cmd
 
 import (
-	"github.com/morgulbrut/color"
+	"github.com/morgulbrut/colorlog"
 	"github.com/spf13/cobra"
 )
 
@@ -24,7 +24,7 @@ var sixlayerCmd = &cobra.Command{
 	Use:   "sixlayer",
 	Short: "Initializes a new 6 layer altium project: init sixlayer <PROJECTNAME>",
 	Run: func(cmd *cobra.Command, args []string) {
-		color.Green("Initalizing 6-layer project %s", args[0])
+		colorlog.Info("Initalizing 6-layer project %s", args[0])
 		InitializeProject("sixlayer", args[0])
 	},
 }
