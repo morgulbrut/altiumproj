@@ -12,6 +12,7 @@ var twolayerCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		colorlog.Info("Initalizing 2-layer project %s", args[0])
 		InitializeProject("twolayer", args[0])
+		FixProject("Template_2L", args[0])
 	},
 }
 

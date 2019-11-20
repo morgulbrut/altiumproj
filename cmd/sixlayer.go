@@ -12,6 +12,7 @@ var sixlayerCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		colorlog.Info("Initalizing 6-layer project %s", args[0])
 		InitializeProject("sixlayer", args[0])
+		FixProject("Template_6L", args[0])
 	},
 }
 

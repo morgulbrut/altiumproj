@@ -19,8 +19,8 @@ var renameCmd = &cobra.Command{
 		if len(args) == 2 {
 			oldname := args[0]
 			newname := args[1]
-			renameFiles(oldname, newname)
-			fixProject(oldname, newname)
+			RenameFiles(oldname, newname)
+			FixProject(oldname, newname)
 		} else {
 			colorlog.Fatal("Wrong amount of arguments")
 			os.Exit(0)
@@ -28,7 +28,7 @@ var renameCmd = &cobra.Command{
 	},
 }
 
-func renameFiles(oldname, newname string) {
+func RenameFiles(oldname, newname string) {
 	colorlog.Info("Renaming project %s to %s", oldname, newname)
 	files, err := filepath.Glob("*" + oldname + "*")
 	if err != nil {
@@ -48,7 +48,7 @@ func renameFiles(oldname, newname string) {
 	}
 }
 
-func fixProject(oldname, newname string) {
+func FixProject(oldname, newname string) {
 	in, err := ioutil.ReadFile(newname + ".PrjPCB")
 	if err != nil {
 		log.Fatalln(err)

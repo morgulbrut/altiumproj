@@ -59,7 +59,7 @@ func InitializeProject(dst string, project string) (err error) {
 		os.Exit(1)
 	}
 
-	writeProjectFile(project)
+	// writeProjectFile(project)
 	return
 }
 
