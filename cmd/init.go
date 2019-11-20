@@ -3,8 +3,6 @@ package cmd
 import (
 	"io/ioutil"
 	"os"
-	"path/filepath"
-	"text/template"
 
 	"github.com/gobuffalo/packr/v2"
 	"github.com/morgulbrut/altiumproj/utils"
@@ -17,13 +15,18 @@ import (
 var initCmd = &cobra.Command{
 	Use:   "init <TEMPLATENAME> <NAME>",
 	Short: "Initalize a new project",
-	Long:  "Initalize a new project",
+	Long:  "Initalize a new project in the directory its called.",
 	Run: func(cmd *cobra.Command, args []string) {
-		tmp := args[0]
-		name := args[1]
-		InitializeProject(tmp, name)
-		os.Chdir(name)
-		FixProject(tmp, name)
+		if len(args) == 2 {
+			tmp := args[0]
+			name := args[1]
+			InitializeProject(tmp, name)
+			os.Chdir(name)
+			FixProject(tmp, name)
+		} else {
+			colorlog.Fatal("Wrong amount of arguments")
+			os.Exit(0)
+		}
 	},
 }
 
@@ -51,7 +54,6 @@ func InitializeProject(dst string, project string) (err error) {
 		os.Exit(1)
 	}
 
-	// writeProjectFile(project)
 	return
 }
 
@@ -66,23 +68,5 @@ func writeTemplateZip(tmpl string, project string) (err error) {
 	if err != nil {
 		colorlog.Fatal(err.Error())
 	}
-	return
-}
-
-func writeProjectFile(project string) (err error) {
-	colorlog.Debug("Writing %s.PrjPCB", project)
-	tpl, err := template.ParseFiles(filepath.Join(project, "Template.PrjPCBTmpl"))
-	if err != nil {
-		colorlog.Fatal(err.Error())
-	}
-	projFile, err := os.Create(filepath.Join(project, project+".PrjPCB"))
-	if err != nil {
-		colorlog.Fatal(err.Error())
-	}
-	err = tpl.Execute(projFile, project)
-	if err != nil {
-		colorlog.Fatal(err.Error())
-	}
-	os.Remove(filepath.Join(project, "Template.PrjPCBTmpl"))
 	return
 }

@@ -4,9 +4,9 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"path/filepath"
 	"strings"
 
+	"github.com/morgulbrut/altiumproj/utils"
 	"github.com/morgulbrut/colorlog"
 	"github.com/spf13/cobra"
 )
@@ -19,7 +19,10 @@ var renameCmd = &cobra.Command{
 		if len(args) == 2 {
 			oldname := args[0]
 			newname := args[1]
-			RenameFiles(oldname, newname)
+			rename := []string{"BomDoc", "PcbDoc", "PrjPCB", "SchDoc"}
+			utils.RenameFiles(oldname, newname, rename)
+			os.Rename(oldname, newname)
+			os.Chdir(newname)
 			FixProject(oldname, newname)
 		} else {
 			colorlog.Fatal("Wrong amount of arguments")
@@ -28,24 +31,8 @@ var renameCmd = &cobra.Command{
 	},
 }
 
-func RenameFiles(oldname, newname string) {
-	colorlog.Info("Renaming project %s to %s", oldname, newname)
-	files, err := filepath.Glob("*" + oldname + "*")
-	if err != nil {
-		colorlog.Fatal(err.Error())
-	}
-	pwd, err := os.Getwd()
-	if err != nil {
-		colorlog.Fatal(err.Error())
-	}
-
-	for _, f := range files {
-		colorlog.Debug("renaming %s", f)
-		oldpath := filepath.Join(pwd, f)
-		filetype := strings.Split(f, ".")[1]
-		newpath := filepath.Join(pwd, newname+"."+filetype)
-		os.Rename(oldpath, newpath)
-	}
+func init() {
+	rootCmd.AddCommand(renameCmd)
 }
 
 func FixProject(oldname, newname string) {
@@ -60,8 +47,4 @@ func FixProject(oldname, newname string) {
 	if err != nil {
 		log.Fatalln(err)
 	}
-}
-
-func init() {
-	rootCmd.AddCommand(renameCmd)
 }
