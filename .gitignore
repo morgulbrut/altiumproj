@@ -1,2 +1,6 @@
 altiumproj
 packrd/packed-packr.go
+templates_src/fourlayer/History/
+templates_src/sixlayer/History/
+templates_src/twolayer/History/
+*.htm
