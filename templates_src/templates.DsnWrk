@@ -1,0 +1,8 @@
+[ProjectGroup]
+Version=1.0
+[Project1]
+ProjectPath=twolayer\Template_2L.PrjPCB
+[Project2]
+ProjectPath=fourlayer\Template_4L.PrjPCB
+[Project3]
+ProjectPath=sixlayer\Template_6L.PrjPCB
