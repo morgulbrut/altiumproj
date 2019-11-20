@@ -15,7 +15,7 @@ var cfgFile string
 var rootCmd = &cobra.Command{
 	Use:   "altiumproj",
 	Short: "A programm to initialize 2,4 or 6 layer projects",
-	Long:  `This programm should be in the same folder as the Altium templates.`,
+	Long:  "A programm to initialize 2,4 or 6 layer projects",
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	//	Run: func(cmd *cobra.Command, args []string) { },

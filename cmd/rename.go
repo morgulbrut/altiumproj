@@ -13,7 +13,7 @@ import (
 
 // renameCmd represents the rename command
 var renameCmd = &cobra.Command{
-	Use:   "rename <oldname> <newname>",
+	Use:   "rename <OLDNAME> <NEWNAME>",
 	Short: "Renames a project and it's files",
 	Run: func(cmd *cobra.Command, args []string) {
 		if len(args) == 2 {
