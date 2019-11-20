@@ -34,9 +34,11 @@ def compress_templates():
 
     logging.warning("Compressing templates...")
     for dir in os.listdir("templates_src"):
-        logging.info("\tzipping {}".format(dir))
-        shutil.make_archive("templates/"+dir, 'zip', "templates_src/"+dir)
-
+        try:
+            logging.info("\tzipping {}".format(dir))
+            shutil.make_archive("templates/"+dir, 'zip', "templates_src/"+dir)
+        except NotADirectoryError:
+            pass
 
 compress_templates()
 logging.warning("Installing using pakr...")
