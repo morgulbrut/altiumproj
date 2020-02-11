@@ -32,8 +32,14 @@ logging.setLevel("INFO")
 def get_templates():
     logging.warning("Copying template sources...")
     for t in templates:
-        logging.info("\tcopying {}".format(t))
+        logging.warning("\tCopying {}...".format(t))
         shutil.copytree(os.path.join(template_dir,t),os.path.join("templates_src",t))
+        for dir in ["__Previews",".svn", "History", "Project Logs for "+t,"Project Outputs for "+t]: # DIRS to clean up
+            try:
+                logging.info("\t\tdeleting {}".format(dir))
+                shutil.rmtree(os.path.join("templates_src",t,dir))
+            except:
+                pass
 
 def compress_templates():
     logging.warning("Compressing templates...")
