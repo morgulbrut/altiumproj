@@ -4,13 +4,9 @@
 Command line tool to intialize and rename Altium Designer projects.
 
 ## Templates
-By default there are a twolayer, a fourlayer and a sixlayer template installed.
+In `build.py` in line 3 and 4 you can set the path to your templates.
 
-Theres a `templates_src` containing the Altium Designer template projects as well as a workspace for them.
-
-### Own templates
-
-Just put a cleaned up (deleted History and stuff) Altium Designer project into the `template_src` folder and build it using `build.py`.
+Templates should be in folders and as clean as possible (no history and no output folders.) The of those folders will later by the names of you templates.
 
 
 ## Building
